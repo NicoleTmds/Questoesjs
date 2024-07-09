@@ -1,0 +1,35 @@
+{
+  "name": "example",
+  "connection": {
+    "_id": "619459086b56da1078d3cf62",
+    "label": "pariatur"
+  },
+  "connections": [
+    {
+      "_id": "6194590847e29864f074fd6b",
+      "label": "minim"
+    },
+    {
+      "_id": "6194590836eff3460e579dea",
+      "label": "ad"
+    },
+    {
+      "_id": "6194590809beac7af1db9197",
+      "label": "velit"
+    }
+  ],
+  "other": {
+    "nested": {
+      "connections": [
+        {
+          "_id": "61945908daa72c63c52f5917",
+          "label": "nisi"
+        },
+        {
+          "_id": "619459081b9359627ffb174d",
+          "label": "voluptate"
+        }
+      ]
+    }
+  }
+}
