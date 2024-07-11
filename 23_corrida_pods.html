@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Corrida</title>
+</head>
+<body>
+
+<script>
+  class Corrida {
+    constructor(...corredores) {
+      this.corredores = corredores;
+    }
+    
+    getClassificacao() {
+      const classificacao = {};
+      for (let i = 0; i < this.corredores.length; i++) {
+        classificacao[`${i + 1}º`] = this.corredores[i];
+      }
+      return classificacao;
+    }
+    
+    atualizarClassificacao(str) {
+      const [corredor, acao] = str.split(" ");
+      if (acao.includes("ELIMINATE")) {
+        this.eliminarCorredor(corredor);
+      } else {
+        this.atualizarCorredor(corredor, acao);
+      }
+    }
+    
+    atualizarCorredor(corredor, acao) {
+      const eliminados = this.corredores.filter((c) =>
+        c.includes("ELIMINATED")
+      );
+      const ativos = this.corredores.filter((c) => !c.includes("ELIMINATED"));
+
+      const posicaoAtual = ativos.indexOf(corredor);
+      const novaPosicao = posicaoAtual + Number(acao) * -1;
+      if (novaPosicao >= this.corredores.length || novaPosicao < 0) {
+        console.log("Erro! Atualização inválida");
+        return;
+      }
+      ativos.splice(posicaoAtual, 1);
+
+      this.corredores = [
+        ...ativos.slice(0, novaPosicao),
+        corredor,
+        ...ativos.slice(novaPosicao),
+        ...eliminados,
+      ];
+    }
+    
+    eliminarCorredor(corredor) {
+      const eliminados = this.corredores.filter((c) =>
+        c.includes("ELIMINATED")
+      );
+      const ativos = this.corredores.filter((c) => !c.includes("ELIMINATED"));
+
+      ativos.splice(ativos.indexOf(corredor), 1);
+
+      this.corredores = [...ativos, `${corredor} ELIMINATED`, ...eliminados];
+    }
+  }
+
+  const corrida1 = new Corrida("Alfa", "Beta", "Gama", "Delta");
+
+  console.log(corrida1.getClassificacao());
+  corrida1.atualizarClassificacao("Beta +1");
+
+  console.log(corrida1.getClassificacao());
+  corrida1.atualizarClassificacao("Gama -1");
+
+  console.log(corrida1.getClassificacao());
+  corrida1.atualizarClassificacao("Delta ELIMINATE");
+
+  console.log(corrida1.getClassificacao());
+  corrida1.atualizarClassificacao("Gama +2");
+
+  console.log(corrida1.getClassificacao());
+  corrida1.atualizarClassificacao(corrida1.getClassificacao());
+
+  console.log(corrida1.getClassificacao());
+
+</script>
+
+</body>
+</html>
