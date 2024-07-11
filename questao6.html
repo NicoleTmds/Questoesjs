@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function inversaoPalavras(string) {
+    return string
+        .split(' ')
+        .map(palavra => 
+            palavra.split('').reverse().join('').toLowerCase()
+        )
+        .join(' '); 
+}
+
+let entrada = prompt("Insira a frase que será invertida:");
+
+if (entrada) {
+    let resultado = inversaoPalavras(entrada);
+
+    alert("A frase invertida é: " + resultado);
+} else {
+    alert("Você não digitou nada.");
+}
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

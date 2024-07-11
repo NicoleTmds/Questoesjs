@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+   function inverterArray(arr) {
+    var arrInvertido = [];
+    for (var i = arr.length - 1; i >= 0; i--) {
+        arrInvertido.push(arr[i]);
+    }
+    return arrInvertido;
+}
+
+// Função para capturar a entrada do usuário e inverter o array
+function capturarEInverterArray() {
+    // Captura a entrada do usuário como uma string
+    var entrada = prompt("Digite os elementos do array separados por vírgula:");
+    
+    // Converte a string de entrada em um array
+    var arrayOriginal = entrada.split(',');
+    
+    // Inverte o array
+    var arrayInvertido = inverterArray(arrayOriginal);
+    
+    // Exibe o array original e o array invertido
+    alert("Array Original: " + arrayOriginal.join(', '));
+    alert("Array Invertido: " + arrayInvertido.join(', '));
+}
+
+// Chama a função para capturar e inverter o array
+capturarEInverterArray();
+
+
+
+</script>
+<body>
+    
+</body>
+</html>

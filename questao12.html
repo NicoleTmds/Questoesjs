@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+ function contarMoedas(value) {
+    let coins = [500, 100, 25, 10, 5, 1];
+    let resultado = {};
+
+    for (let coin of coins) {
+        resultado[coin] = Math.floor(valor / coin);
+        valor %= coin;
+    }
+
+    return resultado;
+}
+
+let valor = parseInt(prompt("Insira um valor inteiro:"));
+
+let resultado = contarMoedas(valor);
+
+let output = Object.keys(resultado).map(coin => `'${coin}': ${resultado[coin]}`).join(', ');
+alert(`Resultado: { ${output} }`);
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Descriptografar Cifra de César</title>
+</head>
+<body>
+    <h2>Descriptografar Cifra de César</h2>
+    <button onclick="handleDecrypt()">Descriptografar</button>
+    <p id="decryptedText"></p>
+
+    <script>
+        function decryptCaesarCipher(str, shift) {
+            var decryptedText = '';
+
+            for (var i = 0; i < str.length; i++) {
+                var char = str[i];
+                var charCode = char.charCodeAt(0);
+
+                
+                if (char >= 'A' && char <= 'Z') {
+                    var newCharCode = charCode - shift;
+                    if (newCharCode < 65) {
+                        newCharCode += 26;
+                    }
+                    decryptedText += String.fromCharCode(newCharCode);
+                }
+                
+                else if (char >= 'a' && char <= 'z') {
+                    var newCharCode = charCode - shift;
+                    if (newCharCode < 97) {
+                        newCharCode += 26;
+                    }
+                    decryptedText += String.fromCharCode(newCharCode);
+                }
+                
+                else {
+                    decryptedText += char;
+                }
+            }
+
+            return decryptedText;
+        }
+
+        function handleDecrypt() {
+            var encryptedText = prompt('Digite o texto criptografado:');
+            var shift = parseInt(prompt('Digite o valor do deslocamento:'));
+            var decryptedText = decryptCaesarCipher(encryptedText, shift);
+            document.getElementById('decryptedText').textContent = 'Texto descriptografado: ' + decryptedText;
+        }
+    </script>
+</body>
+</html>

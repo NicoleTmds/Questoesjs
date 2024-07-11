@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questão 18</title>
+</head>
+<body>
+    <script>
+    
+        class EquacaoSegundoGrau {
+            constructor(a, b, c) {
+              this.a = a;
+              this.b = b;
+              this.c = c;
+            }
+          
+            calcularDelta() {
+              if (this.a === 0) {
+                console.log('Não é uma equação do segundo grau.');
+                return null;
+              }
+              const delta = (this.b ** 2) - (4 * this.a * this.c);
+              console.log(`Delta: Δ = ${this.b}² - 4 * ${this.a} * ${this.c} = ${delta}`);
+              return delta;
+            }
+          
+            calcularRaizes() {
+              if (this.a === 0) {
+                // Resolver a equação linear bx + c = 0
+                if (this.b === 0) {
+                  if (this.c === 0) {
+                    console.log('A equação tem infinitas soluções.');
+                    return ['infinitas soluções'];
+                  } else {
+                    console.log('A equação não tem solução.');
+                    return [];
+                  }
+                } else {
+                  const raiz = -this.c / this.b;
+                  console.log(`A equação é linear. A raiz é: x = ${raiz}`);
+                  return [raiz];
+                }
+              }
+          
+              const delta = this.calcularDelta();
+              if (delta === null) {
+                return [];
+              }
+          
+              if (delta < 0) {
+                console.log('Delta é negativo. Não existem raízes reais.');
+                return [];
+              } else if (delta === 0) {
+                const raiz = -this.b / (2 * this.a);
+                console.log(`Delta é zero. Existe uma raiz real: x = ${raiz}`);
+                return [raiz];
+              } else {
+                const raiz1 = (-this.b + Math.sqrt(delta)) / (2 * this.a);
+                const raiz2 = (-this.b - Math.sqrt(delta)) / (2 * this.a);
+                console.log(`Delta é positivo. Existem duas raízes reais: x1 = ${raiz1}, x2 = ${raiz2}`);
+                return [raiz1, raiz2];
+              }
+            }
+          }
+          
+          // Testando a classe com entradas (0, 2, 6)
+          const a = 1;
+          const b = -4;
+          const c = -5;
+          const equacao = new EquacaoSegundoGrau(a, b, c);
+          const raizes = equacao.calcularRaizes();
+          console.log(`As raízes da equação ${a}x² + (${b})x + (${c}) = 0 são: [${raizes}]`);        
+           
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+   function validarAgrupamentos(codigo) {
+    let pilha = [];
+    let pares = {
+        '(': ')',
+        '[': ']',
+        '{': '}'
+    };
+
+    for (let i = 0; i < codigo.length; i++) {
+        let caractere = codigo[i];
+        
+        if (pares[caractere]) {
+            pilha.push(caractere);
+        } else if (caractere === ')' || caractere === ']' || caractere === '}') {
+            let topo = pilha.pop();
+            if (pares[topo] !== caractere) {
+                return false;
+            }
+        }
+    }
+
+    return pilha.length === 0;
+}
+
+// Testes
+console.log(validarAgrupamentos('((((([(]))))))')); 
+// Output: false
+
+console.log(validarAgrupamentos('{(){([]){[]}()()()()[]}(){(())}(())}')); 
+// Output: true
+
+console.log(validarAgrupamentos('function inserirPalavra(frase, palavra, indices) { if (indices.length === 0) { return frase; } let arrayFrase = frase.split(\'\'); for (let i = 0; i < indices.length; i++) { let index = indices[i]; if (index >= 0 && index <= arrayFrase.length) { arrayFrase.splice(index, 0, palavra); } } return arrayFrase.join(\'\'); }')); 
+// Output: true
+
+console.log(validarAgrupamentos('function inserirPalavra(frase, palavra, indices) { if (indices.length === 0) { return frase; } let arrayFrase = frase.split(\'\'); for (let i = 0; i < indices.length; i++) { let index = indices[i]; if (index >= 0 && index <= arrayFrase.length) { arrayFrase.splice(index, 0, palavra); } } return arrayFrase.join(\'\'); }')); 
+// Output: false (adiciona um erro proposital como uma chave aberta extra)
+
+
+</script>
+<body>
+    
+</body>
+</html>

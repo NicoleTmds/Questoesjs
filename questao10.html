@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questão 10</title>
+</head>
+<body>
+
+    <script>
+        
+        function factorial(num) {
+            
+            if (num === 0) {
+              return 1;
+            }
+          
+            
+            if (num < 0) {
+              throw new Error("O fatorial não está definido para números negativos.");
+            }
+          
+            
+            return num * factorial(num - 1);
+          }
+          
+          
+          let number = prompt("Insira o número para o cálculo de fatorial: ");
+          try {
+            let result = factorial(number);
+            console.log(`O fatorial de ${number} é ${result}`);
+          } catch (error) {
+            console.error(error.message);
+          }
+
+
+    </script>
+    
+</body>
+</html>

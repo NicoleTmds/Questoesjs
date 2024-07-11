@@ -18,6 +18,6 @@ function persistenciaMultiplicativa(numero) {
   }
   
 
-  const valor = 7169;
-  const persistencia = persistenciaMultiplicativa(valor);
-  console.log(`A persistência multiplicativa de ${valor} é: ${persistencia}`);
+const valor = 7169;
+const persistencia = persistenciaMultiplicativa(valor);
+console.log(`A persistência multiplicativa de ${valor} é: ${persistencia}`);

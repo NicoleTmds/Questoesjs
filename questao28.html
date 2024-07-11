@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+   class Explorer {
+    constructor() {
+        this.level = 1;
+        this.experience = 0;
+        this.rank = "Novato";
+        this.planetsExplored = [];
+        this.terrainSpecialist = {};
+        this.isAlive = true;
+        this.criticalSuccessCount = {};
+    }
+
+    // Método para calcular a experiência necessária para subir de nível
+    experienceToLevelUp() {
+        return 100 + 10 * this.level;
+    }
+
+    // Método para atualizar o ranque do explorador
+    updateRank() {
+        if (this.level >= 1 && this.level <= 9) {
+            this.rank = "Novato";
+        } else if (this.level >= 10 && this.level <= 29) {
+            this.rank = "Explorador";
+        } else if (this.level >= 30 && this.level <= 49) {
+            this.rank = "Veterano";
+        } else if (this.level >= 50 && this.level <= 79) {
+            this.rank = "Elite";
+        } else if (this.level >= 80 && this.level <= 98) {
+            this.rank = "Mestre";
+        } else if (this.level === 99) {
+            this.rank = "Lenda";
+        }
+    }
+
+    // Método para ganhar pontos de experiência e possivelmente subir de nível
+    gainExperience(points) {
+        this.experience += points;
+        while (this.experience >= this.experienceToLevelUp() && this.level < 99) {
+            this.experience -= this.experienceToLevelUp();
+            this.level++;
+        }
+        this.updateRank();
+    }
+
+    // Método para simular o rolamento de dados
+    rollDice() {
+        const die1 = Math.floor(Math.random() * 6) + 1;
+        const die2 = Math.floor(Math.random() * 6) + 1;
+        return die1 + die2;
+    }
+
+    // Método para explorar um planeta
+    explorePlanet(planet) {
+        if (!this.isAlive) return false;
+
+        let roll = this.rollDice();
+        const terrain = planet.terrain;
+
+        // Aplicar bônus se o explorador for especialista no terreno
+        if (this.terrainSpecialist[terrain]) {
+            roll += 1;
+        }
+
+        // Verificar resultado da exploração
+        let success = false;
+        if (planet.hostility === "pacífico" && roll >= 5) {
+            success = true;
+        } else if (planet.hostility === "neutral" && roll >= 7) {
+            success = true;
+        } else if (planet.hostility === "hostil" && roll >= 9) {
+            success = true;
+        }
+
+        if (success) {
+            this.planetsExplored.push(planet);
+            if (roll === 12) {
+                if (!this.criticalSuccessCount[terrain]) {
+                    this.criticalSuccessCount[terrain] = 0;
+                }
+                this.criticalSuccessCount[terrain]++;
+                if (this.criticalSuccessCount[terrain] >= 3) {
+                    this.terrainSpecialist[terrain] = true;
+                }
+            }
+            const expPoints = planet.hostility === "pacífico" ? 15 : planet.hostility === "neutral" ? 25 : 50;
+            this.gainExperience(expPoints);
+            return true;
+        } else {
+            if (roll === 2 && planet.hostility === "hostil") {
+                this.isAlive = false;
+            }
+            const expPoints = planet.hostility === "hostil" ? 10 : 0;
+            this.gainExperience(expPoints);
+            return false;
+        }
+    }
+}
+
+// Testando a classe com o exemplo fornecido
+let explorer = new Explorer();
+explorer.level = 9;
+explorer.experience = 1340;
+explorer.criticalSuccessCount['forest'] = 2;
+explorer.updateRank();
+
+// Explorando o planeta "Planeta 1"
+const planet1 = { id: 1, name: 'Planeta 1', hostility: 'neutral', terrain: 'forest' };
+let success = explorer.explorePlanet(planet1);
+
+console.log(`Explorou Planeta 1 com sucesso? ${success}`);
+console.log(`Nível: ${explorer.level}`);
+console.log(`Experiência: ${explorer.experience}`);
+console.log(`Ranque: ${explorer.rank}`);
+console.log(`Especialista em 'forest': ${explorer.terrainSpecialist['forest']}`);
+console.log(`Planetas explorados: ${JSON.stringify(explorer.planetsExplored)}`);
+
+// Explorando o planeta "Planeta 2" com falha crítica
+const planet2 = { id: 2, name: 'Planeta 2', hostility: 'hostil', terrain: 'desert' };
+explorer.explorePlanet = () => 2; // Forçando o resultado de rolamento 2 para simulação
+success = explorer.explorePlanet(planet2);
+
+console.log(`Explorou Planeta 2 com sucesso? ${success}`);
+console.log(`Está vivo? ${explorer.isAlive}`);
+console.log(`Nível: ${explorer.level}`);
+console.log(`Experiência: ${explorer.experience}`);
+console.log(`Ranque: ${explorer.rank}`);
+console.log(`Planetas explorados: ${JSON.stringify(explorer.planetsExplored)}`);
+
+
+</script>
+<body>
+    
+</body>
+</html>

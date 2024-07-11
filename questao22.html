@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function findMissingElements(arr) {
+    if (arr.length === 0) {
+        return [];
+    }
+
+    let numbers = arr.map(num => parseInt(num, 10));
+
+    let maxNum = Math.max(...numbers);
+
+    let completeSet = new Set();
+    for (let i = 1; i <= maxNum; i++) {
+        completeSet.add(i.toString().padStart(4, '0'));
+    }
+
+    for (let num of arr) {
+        completeSet.delete(num);
+    }
+
+    let missingElements = Array.from(completeSet).sort();
+
+    return missingElements;
+}
+let input = prompt("Insira valores separados por vírgula:");
+let numbers = input.split(",");
+
+let missingElements = findMissingElements(numbers);
+
+let output = missingElements.length === 0 ? "Nenhum elemento faltando." : missingElements.join(", ");
+alert(`Elementos faltando:\n${output}`);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

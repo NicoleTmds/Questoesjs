@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questão 26</title>
+</head>
+<body>
+
+    <script>
+          
+        class Fibonacci {
+            constructor() {}
+          
+            static encontrarNumero(posicao) {
+              if (posicao < 0) {
+                throw new Error("A posição deve ser maior ou igual a 0.");
+              }
+          
+              if (posicao === 0) {
+                return 0;
+              } else if (posicao === 1) {
+                return 1;
+              }
+          
+              let anterior = 0;
+              let atual = 1;
+              let proximo = 0;
+          
+              for (let i = 2; i <= posicao; i++) {
+                proximo = anterior + atual;
+                anterior = atual;
+                atual = proximo;
+              }
+          
+              return atual;
+            }
+          }
+          
+          // Testando a função
+          const posicao = prompt("Insira a posição para o valor da sequência de Fibonacci: ");
+          const numeroFibonacci = Fibonacci.encontrarNumero(posicao);
+          console.log(`O número na posição ${posicao} da sequência de Fibonacci é ${numeroFibonacci}`); // Deve exibir "O número na posição 7 da sequência de Fibonacci é 13"
+
+    </script>
+    
+</body>
+</html>

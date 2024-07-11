@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+   function inserirPalavra(frase, palavra, indices) {
+    if (indices.length === 0) {
+        return frase;
+    }
+
+    // Converter a frase em um array de caracteres
+    let arrayFrase = frase.split('');
+    
+    // Adicionar a palavra nos índices especificados
+    for (let i = 0; i < indices.length; i++) {
+        let index = indices[i];
+        if (index >= 0 && index <= arrayFrase.length) {
+            arrayFrase.splice(index, 0, palavra);
+        }
+    }
+
+    // Converter o array de volta para uma string e retornar
+    return arrayFrase.join('');
+}
+
+// Testes
+console.log(inserirPalavra('capaz utilizar as cápsulas emergência', 'de', [6, 27])); 
+// Output: 'capaz de utilizar as cápsulas de emergência'
+
+console.log(inserirPalavra('Nós decidimos apesar das chances serem baixas que enviaríamos um sinal para [...]', ',', [13, 45]));
+// Output: 'Nós decidimos, apesar das chances serem baixas, que enviaríamos um sinal para [...]'
+
+console.log(inserirPalavra('Hello', 'world', [6])); 
+// Output: 'Hello'
+
+console.log(inserirPalavra('Isso é um teste', 'não', [])); 
+// Output: 'Isso é um teste'
+
+</script>
+<body>
+    
+</body>
+</html>
