@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verificação de String</title>
+    <script>
+        
+        const existingNames = new Set(["usuario1", "usuario_2", "exemplo_3", "teste_4"]);
+
+        function verificaString(nome) {
+            
+            if (nome.length < 4 || nome.length > 32) {
+                return false;
+            }
+            
+            
+            const regexValidChars = /^[a-zA-Z0-9_]+$/;
+            if (!regexValidChars.test(nome)) {
+                return false;
+            }
+            
+            
+            const regexStartsWithLetter = /^[a-zA-Z]/;
+            if (!regexStartsWithLetter.test(nome)) {
+                return false;
+            }
+            
+            
+            if (nome.endsWith('_')) {
+                return false;
+            }
+            
+            
+            const containsLetter = /[a-zA-Z]/.test(nome);
+            const containsNumber = /[0-9]/.test(nome);
+            const containsUnderscore = /_/.test(nome);
+            
+            if (!(containsLetter && containsNumber && containsUnderscore)) {
+                return false;
+            }
+            
+            
+            if (existingNames.has(nome)) {
+                return false;
+            }
+            
+            
+            return true;
+        }
+
+        function solicitarNome() {
+            const nome = prompt("Digite um nome para verificação:");
+            if (verificaString(nome)) {
+                alert("O nome é válido e único.");
+            } else {
+                alert("O nome não atende aos requisitos ou já existe.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Verificação de String</h1>
+    <button onclick="solicitarNome()">Verificar Nome</button>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questao8</title>
+</head>
+<body>
+    <script>
+        let nome = prompt("Digite seu nome completo:");
+    
+        // Abreviar o nome e mostrar o resultado
+        if (nome) {
+            let nomeAbreviado = abreviarNome(nome);
+            alert("Nome abreviado: " + nomeAbreviado);
+        } else {
+            alert("Nenhum nome digitado.");
+        }
+
+
+        function abreviarNome(nomeCompleto) {
+            // Dividir a string em um array de palavras (nomes)
+            let nomes = nomeCompleto.split(' ');
+
+            // Verificar se há mais de um nome
+            if (nomes.length > 1) {
+                // Obter o último nome e transformá-lo em maiúsculas
+                let ultimoNome = nomes.pop().toUpperCase();
+
+                // Abreviar todos os nomes restantes
+                let nomesAbreviados = nomes.map(nome => nome.charAt(0) + '.');
+
+                // Unir as abreviações com o último nome em maiúsculas
+                return ultimoNome + ', ' + nomesAbreviados.join(' ');
+            } else {
+                // Caso haja apenas um nome, retorná-lo em maiúsculas
+                return nomeCompleto.toUpperCase();
+            }
+        }
+        
+    </script>
+</body>
+</html>

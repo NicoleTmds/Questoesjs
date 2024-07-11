@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+  function temQuantidadesIguais(str) {
+    // Remover espaços e converter para minúsculas para normalizar a string
+    str = str.replace(/\s+/g, '').toLowerCase();
+    
+    // Criar um objeto para contar a frequência de cada caractere
+    const frequencias = {};
+    
+    for (let char of str) {
+        if (frequencias[char]) {
+            frequencias[char]++;
+        } else {
+            frequencias[char] = 1;
+        }
+    }
+    
+    // Obter todas as frequências em um array
+    const valores = Object.values(frequencias);
+    
+    // Verificar se todas as frequências são iguais
+    return valores.every((val, _, arr) => val === arr[0]);
+}
+
+// Testes
+alert("This is Thee: " + temQuantidadesIguais('This is Thee'));  // true
+alert("ssd: " + temQuantidadesIguais('ssd'));           // false
+alert("Lorem ipsum: " + temQuantidadesIguais('Lorem ipsum'));   // false
+alert("QQwweerrttyy: " + temQuantidadesIguais('QQwweerrttyy'));  // true
+
+</script>
+<body>
+    
+</body>
+</html>

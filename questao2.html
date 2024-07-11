@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questao2</title>
+</head>
+<body>
+    <script>
+        function generateChunks(n) {
+            return Array(n).fill('chunk').join('-');
+          }
+          
+          const userInput = prompt("Digite o número de chunks:");
+          const numeroChunks = parseInt(userInput, 10);
+          
+          if (!isNaN(numeroChunks) && numeroChunks > 0) {
+            const result = generateChunks(numeroChunks);
+            alert(result);
+          } else {
+            alert("Por favor, insira um número válido maior que 0.");
+        }
+    </script>
+</body>
+</html>

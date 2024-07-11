@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function gerarPermutacoes(arr) {
+
+    function permutacao(subArr, prefix = []) {
+        if (subArr.length === 0) {
+            resultados.push(prefix);
+        } else {
+            for (let i = 0; i < subArr.length; i++) {
+                permutacao(subArr.slice(0, i).concat(subArr.slice(i + 1)), prefix.concat(subArr[i]));
+            }
+        }
+    }
+
+    let resultados = [];
+    permutacao(arr);
+    return resultados;
+}
+
+let inserir = prompt("Insira caracteres separados por vírgula:");
+let opc = inserir.split(",");
+
+let resultado = gerarPermutacoes(opc);
+
+let output = resultado.map(arr => `[${arr.join(", ")}]`).join(",\n");
+alert(`Resultado:\n${output}`);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

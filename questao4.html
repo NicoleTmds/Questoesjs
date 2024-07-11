@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questão 4</title>
+</head>
+<body>
+    <script>
+    
+    function squareDigits(num) {
+       
+        let numStr = num.toString();
+        let result = '';
+      
+       
+        for (let i = 0; i < numStr.length; i++) {
+         
+          let digit = parseInt(numStr[i]);
+         
+          result += (digit * digit).toString();
+        }
+      
+    
+        return result;
+      }
+      let number = prompt("Insira o número: ");
+      let squaredDigits = squareDigits(number);
+      console.log(squaredDigits);
+      
+    </script>
+
+</body>
+</html>
